@@ -70,16 +70,14 @@ body {
     display:flex;
     padding-top:40px;
     flex-direction: row; 
-    justify-content: space-between; 
-    align-items: center; 
+    
     flex-wrap: wrap; 
 }
 .main2{
   display:flex;
   margin-top:40px;
   flex-direction: row; 
-  justify-content: space-between; 
-  align-items: center; 
+ 
   flex-wrap: wrap; 
 
 
@@ -101,7 +99,7 @@ body {
     color:red;
 }
 .date{
-    width:430px;
+    width:400px;
     margin-top:80px;
    
 }
@@ -455,7 +453,7 @@ form {
   }
  /* Styling for the summary div */
 .summary {
-    width: 550px;
+    width: 440px;
     margin-top:100px;
     margin-left:20px;
     margin-right:10px;
@@ -580,7 +578,7 @@ form {
    
   }
   .summary8 {
-    width: 500px;
+    width: 400px;
     margin-top:30px;
     margin-left:20px;
     margin-right:10px;
