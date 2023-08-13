@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://kit.fontawesome.com/e8fa2e31b4.js" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="card.css">
+	<link rel="stylesheet" href="booking.css">
+	<ink href='https://fonts.googleapis.com/css?family=Bruno Ace SC' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+		<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+	   />
+	   
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body>
+	<section class="home6">
+		<div class="div2">
+			<h1>HIKKADUWA TURTLE HATCHERY ONLINE RESERVATION</h1>
+		</div>
+		  </section>      
+			  
+			   
+				<div class="main">
+					<div class="ticketDetails">
+						<div class="summary8">
+						  <div class="container">
+							<h2 style="margin-left:50px;">Summary</h2>
+							<table>
+								<tr>
+									<td><h3>date:</h3></td>
+									<td> <p x-text="selectedDate"></p></td>
+								</tr>
+								<tr>
+									<td><h3>Time:</h3></td>
+									<td><p><span class="time-sum">-</span></p></td>
+								</tr>
+								<tr>
+									<td><h3>Time Duration:</h3></td>
+									<td><p><span class="duration-sum">-</span></p></td>
+								</tr>      
+							   
+							</table>
+						   </div>
+						   <div class="container">
+							<table>
+							  <tr>
+								<td><h3>Full Name:</h3></td>
+								<td><p id="summaryFullName"></p></td>
+							  </tr>
+							  <tr>
+								<td><h3>Mobile Number:</h3></td>
+								<td><p id="summaryMobileNumber"></p></td>
+							  </tr>
+							  <tr>
+								<td><h3>Email:</h3></td>
+								<td><p id="summaryEmail"></p></td>
+							  </tr>
+							  <tr>
+								<td><h3>Confirm Email:</h3></td>
+								<td><p id="summaryConfirmEmail"></p></td>
+							  </tr>
+							  <tr>
+								<td><h3>Gender:</h3></td>
+								<td><p id="summaryGender"></p></td>
+							  </tr>
+							</table>
+							</div>
+							</div>
+							</div>
+	<div class="container1">
+		
+		<div class="center">
+			<a href="https://www.shift4shop.com/credit-card-logos.html"><img alt="Credit Card Logos" title="Credit Card Logos" src="https://www.shift4shop.com/images/credit-card-logos/cc-lg-4.png" width="250" height="auto"/></a>
+			<hr style="border:1px solid #ccc; margin: 0 15px;">
+
+			<div class="card-details">
+				<form id="paymentForm">
+					<p>Card number</p>
+					<div class="c-number" id="c-number">
+						<input id="number" class="cc-number" placeholder="Card number" maxlength="19" required>
+						<i class="fa-solid fa-credit-card" style="margin: 0;"></i>
+					</div>
+
+					<div class="c-details">
+						<div>
+							<p>Expiry date</p>
+							<input id="e-date" class="cc-exp" placeholder="MM/YY" required maxlength="5" required>
+						</div>
+						<div>
+							<p>CVV</p>
+							<div class="cvv-box" id="cvv-box">
+								<input id="cvv" class="cc-cvv" placeholder="CVV" required maxlength="3" required>
+								<i class="fa-solid fa-circle-question" title="3 digits on the back of the card" style="cursor: pointer;"></i>
+							</div>
+						</div>
+					</div>
+					<div class="email">
+						<p>Email</p>
+						<input type="email" placeholder="example@email.com" required>
+					</div>
+					<button type="button" id="payButton">PAY NOW</button>
+					<script>
+						// Wait for the document to be fully loaded
+						document.addEventListener('DOMContentLoaded', function () {
+							const paymentForm = document.getElementById('paymentForm');
+							const payButton = document.getElementById('payButton');
+				
+							payButton.addEventListener('click', function () {
+								// Assuming the form validation is successful
+								if (paymentForm.checkValidity()) {
+									// Redirect to the confirmation page
+									window.location.href = 'confirm.html';
+								}
+							});
+						});
+					</script>
+					
+				</form>
+			</div>
+		</div>
+</div>
+<div class="summary3">
+	
+	  <div class="container">
+		<table id="summaryTable">
+			<thead>
+				<tr>
+					<th>Tickets</th>
+					<th>count</th>
+					<th>Prices</th>
+				</tr>
+			</thead>
+			<tbody id="summaryBody">
+			</tbody>
+			<tfoot>
+			</tfoot>
+		</table>
+		</div>
+	   
+		</div>
+	</div>
+	<script>
+		// Retrieve user data from local storage
+		const userDataString = localStorage.getItem("userData");
+		if (userDataString) {
+		  const userData = JSON.parse(userDataString);
+		  
+		  // Populate user input values into the summary table
+		  document.getElementById("summaryFullName").textContent = userData.fullName || "";
+		  document.getElementById("summaryMobileNumber").textContent = userData.mobileNumber || "";
+		  document.getElementById("summaryEmail").textContent = userData.email || "";
+		  document.getElementById("summaryConfirmEmail").textContent = userData.email || ""; // You can adjust this based on your use case
+		  document.getElementById("summaryGender").textContent = userData.gender || "";
+		}
+	  </script>
+	  
+	<script>
+		
+		
+    // Retrieve user data from local storage
+    
+  
+		let tColorA = document.getElementById('tColorA'),
+tColorB = document.getElementById('tColorB'),
+tColorC = document.getElementById('tColorC'),
+iconA = document.querySelector('.fa-credit-card'),
+iconB = document.querySelector('.fa-building-columns'),
+iconC = document.querySelector('.fa-wallet'),
+cDetails = document.querySelector('.card-details');
+
+
+function doFun(){
+ tColorA.style.color = "greenyellow";
+ tColorB.style.color = "#444";
+ tColorC.style.color = "#444";
+ iconA.style.color = "greenyellow";
+ iconB.style.color = "#aaa";
+ iconC.style.color = "#aaa";
+ cDetails.style.display = "block";
+}
+function doFunA(){
+ tColorA.style.color = "#444";
+ tColorB.style.color = "greenyellow";
+ tColorC.style.color = "#444";
+ iconA.style.color = "#aaa";
+ iconB.style.color = "greenyellow";
+ iconC.style.color = "#aaa";
+ cDetails.style.display = "none";
+}
+function doFunB(){
+ tColorA.style.color = "#444";
+ tColorB.style.color = "#444";
+ tColorC.style.color = "greenyellow";
+ iconA.style.color = "#aaa";
+ iconB.style.color = "#aaa";
+ iconC.style.color = "greenyellow";
+ cDetails.style.display = "none";
+}
+let cNumber = document.getElementById('number');
+cNumber.addEventListener('keyup', function(e){
+ let num = cNumber.value;
+
+ let newValue = '';
+ num = num.replace(/\s/g, '');
+ for(var i = 0; i < num.length; i++) {
+  if(i%4 == 0 && i > 0) newValue = newValue.concat(' ');
+  newValue = newValue.concat(num[i]);
+  cNumber.value = newValue;
+ }
+
+ let ccNum = document.getElementById('c-number');
+ if(num.length<16){
+  ccNum.style.border="1px solid red";
+ }else{
+  ccNum.style.border="1px solid greenyellow";
+ }
+});
+
+let eDate = document.getElementById('e-date');
+eDate.addEventListener('keyup', function( e ){
+
+ let newInput = eDate.value;
+
+ if(e.which !== 8) {
+  var numChars = e.target.value.length;
+  if(numChars == 2){
+   var thisVal = e.target.value;
+   thisVal += '/';
+   e.target.value = thisVal;
+   console.log(thisVal.length)
+  }
+ }
+
+ if(newInput.length<5){
+  eDate.style.border="1px solid red";
+ }else{
+  eDate.style.border="1px solid greenyellow";
+ }
+});
+
+let cvv = document.getElementById('cvv');
+cvv.addEventListener('keyup', function(e){
+
+ let elen = cvv.value;
+ let cvvBox = document.getElementById('cvv-box');
+ if(elen.length<3){
+  cvvBox.style.border="1px solid red";
+ }else{
+  cvvBox.style.border="1px solid greenyellow";
+ }
+})
+
+	</script>
+	
+	
+			<script>
+				// Load stored data on page load (if any)
+				document.addEventListener("DOMContentLoaded", () => {
+				  document.querySelector('.time-sum').innerHTML = localStorage.getItem("timeSummary");
+				  document.querySelector('.duration-sum').innerHTML = localStorage.getItem("durationSummary");
+				 
+				  // Retrieve the JSON string from local storage
+				  const ticketDataString = localStorage.getItem("ticketData");
+				  
+				  if (ticketDataString) {
+					// Parse the JSON string back into an object
+					const ticketData = JSON.parse(ticketDataString);
+					
+					// Access the properties of the object
+					document.querySelector('#summarySLAdult').innerText = ticketData.SLAdult || 0;
+					document.querySelector('#summarySLChild').innerText = ticketData.SLChild || 0;
+					document.querySelector('#summaryForeignerAdult').innerText = ticketData.ForeignerAdult || 0;
+					document.querySelector('#summaryForeignerChild').innerText = ticketData.ForeignerChild || 0;
+					document.querySelector('#summaryInfant').innerText = ticketData.Infant || 0;
+				  }
+				});
+			  </script>
+			  <script>
+			
+			  
+				// Get the JSON string from local storage
+// Retrieve data from local storage
+const storedFormData = localStorage.getItem("formData");
+const formData = JSON.parse(storedFormData);
+
+// Assuming you have elements with the IDs "selectedDate", "timeSum", "durationSum", "fullName", "mobileNumber", "email", "confirmEmail" on the second page
+
+document.getElementById('fullName').textContent = formData.fullName;
+document.getElementById('mobileNumber').textContent = formData.mobileNumber;
+document.getElementById('email').textContent = formData.email;
+document.getElementById('confirmEmail').textContent = formData.confirmEmail;
+
+
+			</script>
+			
+			   
+			   <script>
+				
+				// Retrieve the stored data from localStorage
+				const storedUserSelections = localStorage.getItem('userSelections');
+		
+				// Check if the data exists in localStorage
+				if (storedUserSelections) {
+					const userSelections = JSON.parse(storedUserSelections);
+		
+					// Access the data in userSelections object
+					const summaryBody = document.getElementById('summaryBody');
+		
+					// Create a row for SL Adult Quantity
+					const slAdultRow = summaryBody.insertRow();
+					const slAdultTicketCell = slAdultRow.insertCell(0);
+					const slAdultCountCell = slAdultRow.insertCell(1);
+					const slAdultChargesCell = slAdultRow.insertCell(2);
+	  
+					const slChildRow = summaryBody.insertRow();
+					const slChildTicketCell = slChildRow.insertCell(0);
+					const slChildCountCell = slChildRow.insertCell(1);
+					const slChildChargesCell = slChildRow.insertCell(2);
+	  
+					const foreignerAdultRow = summaryBody.insertRow();
+					const foreignerAdultTicketCell = foreignerAdultRow.insertCell(0);
+					const foreignerAdultCountCell = foreignerAdultRow.insertCell(1);
+					const foreignerAdultChargesCell = foreignerAdultRow.insertCell(2);
+	  
+					const foreignerChildRow = summaryBody.insertRow();
+					const foreignerChildTicketCell = foreignerChildRow.insertCell(0);
+					const foreignerChildCountCell = foreignerChildRow.insertCell(1);
+					const foreignerChildChargesCell = foreignerChildRow.insertCell(2);
+
+					const InfantRow = summaryBody.insertRow();
+              const InfantTicketCell = InfantRow.insertCell(0);
+              const InfantCountCell = InfantRow.insertCell(1);
+              const InfantChargesCell = InfantRow.insertCell(2);
+
+	  
+					const totalChargesRow = summaryBody.insertRow();
+					const totalChargesTicketCell = totalChargesRow.insertCell(0);
+					const totalChargesCountCell = totalChargesRow.insertCell(1);
+					const totalChargesCell = totalChargesRow.insertCell(2);
+					
+	  
+		
+					slAdultTicketCell.textContent = "SL Adult";
+					slAdultCountCell.textContent = userSelections.SLAdultQuantity;
+					slAdultChargesCell.textContent = userSelections.slAdultCharges;
+	  
+					slChildTicketCell.textContent = "SL Child";
+					slChildCountCell.textContent = userSelections.SLChildQuantity;
+					slChildChargesCell.textContent = userSelections.slChildCharges;
+	  
+					foreignerAdultTicketCell.textContent = "Foreigner Adult";
+					foreignerAdultCountCell.textContent = userSelections.ForeignerAdultQuantity;
+					foreignerAdultChargesCell.textContent = userSelections.foreignerAdultCharges;
+	  
+					foreignerChildTicketCell.textContent = "Foreigner Child";
+					foreignerChildCountCell.textContent = userSelections.ForeignerChildQuantity;
+					foreignerChildChargesCell.textContent = userSelections.foreignerChildCharges;
+
+					InfantTicketCell.textContent="Infant";
+              InfantCountCell.textContent = userSelections.InfantQuantity;
+              InfantChargesCell.innerText = "free";
+	  
+					totalChargesTicketCell.textContent = "Total Price";
+					totalChargesCell.textContent = userSelections.totalCharges;
+	  
+	  
+		
+					// Create similar rows for other types of tickets if needed
+		
+				} else {
+					console.log("No user selections data found.");
+				}
+			</script>
+			
+		  
+      <footer class="footer-distributed">
+
+		<div class="footer-left">
+			<h3>Inuka<span>Upek</span></h3>
+	  
+			<p class="footer-links">
+				<a href="#">Home</a>
+				|
+				<a href="#">categories</a>
+				|
+				<a href="#">threats</a>
+				|
+				<a href="#">contact</a>
+			</p>
+	  
+			<p class="footer-company-name">Copyright © 2023 <strong>Inuka Upek</strong> All rights reserved</p>
+		</div>
+	  
+		<div class="footer-center">
+			<div>
+				<i class="fa fa-map-marker"></i>
+				<p>
+					Colombo</p>
+			</div>
+	  
+			<div>
+				<i class="fa fa-phone"></i>
+				<p>+94-773652290</p>
+			</div>
+			<div>
+				<i class="fa fa-envelope"></i>
+				<p><a href="inukaupek2003@gmail.com">inukaupek2003@gmail.com</a></p>
+			</div>
+		</div>
+		<div class="footer-right">
+			<p class="footer-company-about">
+				<span>About the company</span>
+				<strong>APPIT Sri Lanka</strong> is a reputable higher educational institution established in
+				partnership with Staffordshire University in the UK and Asia
+				Pacific University of Technology and Innovation in Malayasia.
+			</p>
+			<div class="footer-icons">
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-instagram"></i></a>
+				<a href="#"><i class="fa fa-linkedin"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-youtube"></i></a>
+			</div>
+		</div>
+	  </footer>
+	  </body>
+	  </html>

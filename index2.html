@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+   
+</head>
+<ink href='https://fonts.googleapis.com/css?family=Bruno Ace SC' rel='stylesheet'>
+ <link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
+ <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+ <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+ <link
+ rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+/>
+
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+
+
+    <link rel= "stylesheet" href= "booking.css">
+
+   
+
+    <title>Document</title>
+</head>
+
+<body>
+  <section class="home6">
+    <div class="div2">
+        <h1>HIKKADUWA TURTLE HATCHERY ONLINE RESERVATION</h1>
+    </div>
+      </section>      
+          
+            <div class="main">
+    <div class="ticketDetails1">
+        <div class="summary2">
+          <div class="container">
+            <h2 style="margin-left:50px;">Summary</h2>
+            <table>
+                <tr>
+                    <td><h3>date:</h3></td>
+                    <td> <p x-text="selectedDate"></p></td>
+                </tr>
+                <tr>
+                    <td><h3>Time:</h3></td>
+                    <td><p><span class="time-sum">-</span></p></td>
+                </tr>
+                <tr>
+                    <td><h3>Time Duration:</h3></td>
+                    <td><p><span class="duration-sum">-</span></p></td>
+                </tr>      
+               
+            </table>
+           </div>
+           
+          
+          
+            <div class="container">
+              <table id="summaryTable">
+                  <thead>
+                      <tr>
+                          <th>Tickets</th>
+                          <th>count</th>
+                          <th>Prices</th>
+                      </tr>
+                  </thead>
+                  <tbody id="summaryBody">
+                  </tbody>
+                  <tfoot>
+                  </tfoot>
+              </table>
+              </div>
+            </div>
+        
+            </div>
+            
+       <div class="userDetails">
+        
+          <h2>Enter your details</h2>
+          <form id="registrationForm">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" name="fullName" required>
+      
+            <label for="mobileNumber">Mobile Number *</label>
+            
+            <input type="tel" id="mobileNumber" name="mobileNumber" required class="intl-tel-input">
+      
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+      
+            <label for="confirmEmail">Confirm Email *</label>
+            <input type="email" id="confirmEmail" name="confirmEmail" required>
+      
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender">
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+      
+            <button type="submit" id="purchaseBtn1">Continue with purchase</button>
+          </form>
+        
+        </div>
+        
+            
+        </div>
+        </div>
+        
+        
+        <script>
+          // Load stored data on page load (if any)
+          document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector('.time-sum').innerHTML = localStorage.getItem("timeSummary");
+            document.querySelector('.duration-sum').innerHTML = localStorage.getItem("durationSummary");
+            
+            // Retrieve the JSON string from local storage
+            const ticketDataString = localStorage.getItem("ticketData");
+            
+            if (ticketDataString) {
+              // Parse the JSON string back into an object
+              const ticketData = JSON.parse(ticketDataString);
+              
+              // Access the properties of the object
+              document.querySelector('#summarySLAdult').innerText = ticketData.SLAdult || 0;
+              document.querySelector('#summarySLChild').innerText = ticketData.SLChild || 0;
+              document.querySelector('#summaryForeignerAdult').innerText = ticketData.ForeignerAdult || 0;
+              document.querySelector('#summaryForeignerChild').innerText = ticketData.ForeignerChild || 0;
+              document.querySelector('#summaryInfant').innerText = ticketData.Infant || 0;
+            }
+          });
+        </script>
+        
+          <div class="detailbox">
+  
+           
+            
+            </script>
+              <script>
+                
+                function emailValidator() {
+                  return {
+                    email: '',
+                    confirmEmail: '',
+                    emailError: false,
+                    confirmEmailError: false,
+              
+                    validateEmail() {
+                      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                      this.emailError = !emailPattern.test(this.email);
+                    },
+              
+                    validateConfirmEmail() {
+                      this.confirmEmailError = this.email !== this.confirmEmail;
+                    },
+                  };
+                }
+              </script>
+              <script>
+                // Initialize the "intl-tel-input" library on the mobile number input
+                const input = document.querySelector(".intl-tel-input");
+                const iti = window.intlTelInput(input, {
+                  separateDialCode: true,
+                  utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+                });
+                
+                // Add event listener to the registration form
+                const form = document.getElementById("registrationForm");
+                form.addEventListener("submit", function(event) {
+                  event.preventDefault(); // Prevent the form from submitting
+                  
+                  // Get form input values
+                  const fullName = document.getElementById("fullName").value;
+                  const mobileNumber = iti.getNumber(); // Get the phone number with country code
+                  const email = document.getElementById("email").value;
+                  const confirmEmail = document.getElementById("confirmEmail").value;
+                  const gender = document.getElementById("gender").value;
+                  
+                  // Form validation
+                  if (!fullName || !mobileNumber || !email || !confirmEmail) {
+                    alert("Please fill in all required fields.");
+                    return;
+                  }
+                  
+                  if (email !== confirmEmail) {
+                    alert("Email addresses do not match.");
+                    return;
+                  }
+                  
+                  // Additional validation for mobile number (if needed)
+                  
+                  // Save the form data to local storage
+                  const userData = {
+                    fullName,
+                    mobileNumber: `${mobileNumber}`,
+                    email,
+                    gender,
+                  };
+                  
+                  localStorage.setItem("userData", JSON.stringify(userData));
+                  
+                  // Redirect to the next HTML page
+                  window.location.href = "card.html"; // Replace with the actual page URL
+                });
+              </script>
+              
+
+
+    </script>
+    
+      
+        <script>
+          // Retrieve the stored data from localStorage
+          const storedUserSelections = localStorage.getItem('userSelections');
+  
+          // Check if the data exists in localStorage
+          if (storedUserSelections) {
+              const userSelections = JSON.parse(storedUserSelections);
+  
+              // Access the data in userSelections object
+              const summaryBody = document.getElementById('summaryBody');
+  
+              // Create a row for SL Adult Quantity
+              const slAdultRow = summaryBody.insertRow();
+              const slAdultTicketCell = slAdultRow.insertCell(0);
+              const slAdultCountCell = slAdultRow.insertCell(1);
+              const slAdultChargesCell = slAdultRow.insertCell(2);
+
+              const slChildRow = summaryBody.insertRow();
+              const slChildTicketCell = slChildRow.insertCell(0);
+              const slChildCountCell = slChildRow.insertCell(1);
+              const slChildChargesCell = slChildRow.insertCell(2);
+
+              const foreignerAdultRow = summaryBody.insertRow();
+              const foreignerAdultTicketCell = foreignerAdultRow.insertCell(0);
+              const foreignerAdultCountCell = foreignerAdultRow.insertCell(1);
+              const foreignerAdultChargesCell = foreignerAdultRow.insertCell(2);
+
+              const foreignerChildRow = summaryBody.insertRow();
+              const foreignerChildTicketCell = foreignerChildRow.insertCell(0);
+              const foreignerChildCountCell = foreignerChildRow.insertCell(1);
+              const foreignerChildChargesCell = foreignerChildRow.insertCell(2);
+
+              const InfantRow = summaryBody.insertRow();
+              const InfantTicketCell = InfantRow.insertCell(0);
+              const InfantCountCell = InfantRow.insertCell(1);
+              const InfantChargesCell = InfantRow.insertCell(2);
+
+
+              const totalChargesRow = summaryBody.insertRow();
+              const totalChargesTicketCell = totalChargesRow.insertCell(0);
+              const totalChargesCountCell = totalChargesRow.insertCell(1);
+              const totalChargesCell = totalChargesRow.insertCell(2);
+              
+
+  
+              slAdultTicketCell.textContent = "SL Adult";
+              slAdultCountCell.textContent = userSelections.SLAdultQuantity;
+              slAdultChargesCell.textContent = userSelections.slAdultCharges;
+
+              slChildTicketCell.textContent = "SL Child";
+              slChildCountCell.textContent = userSelections.SLChildQuantity;
+              slChildChargesCell.textContent = userSelections.slChildCharges;
+
+              foreignerAdultTicketCell.textContent = "Foreigner Adult";
+              foreignerAdultCountCell.textContent = userSelections.ForeignerAdultQuantity;
+              foreignerAdultChargesCell.textContent = userSelections.foreignerAdultCharges;
+
+              foreignerChildTicketCell.textContent = "Foreigner Child";
+              foreignerChildCountCell.textContent = userSelections.ForeignerChildQuantity;
+              foreignerChildChargesCell.textContent = userSelections.foreignerChildCharges;
+
+              InfantTicketCell.textContent="Infant";
+              InfantCountCell.textContent = userSelections.InfantQuantity;
+              InfantChargesCell.innerText = "free";
+
+
+              totalChargesTicketCell.textContent = "Total Price";
+              totalChargesCell.textContent = userSelections.totalCharges;
+
+
+  
+              // Create similar rows for other types of tickets if needed
+  
+          } else {
+              console.log("No user selections data found.");
+          }
+      </script>
+    
+</div>
+
+          
+          
+          <footer class="footer-distributed">
+
+            <div class="footer-left">
+                <h3>Inuka<span>Upek</span></h3>
+          
+                <p class="footer-links">
+                    <a href="#">Home</a>
+                    |
+                    <a href="#">categories</a>
+                    |
+                    <a href="#">threats</a>
+                    |
+                    <a href="#">contact</a>
+                </p>
+          
+                <p class="footer-company-name">Copyright © 2023 <strong>Inuka Upek</strong> All rights reserved</p>
+            </div>
+          
+            <div class="footer-center">
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p>
+                        Colombo</p>
+                </div>
+          
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>+94-773652290</p>
+                </div>
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="inukaupek2003@gmail.com">inukaupek2003@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <p class="footer-company-about">
+                    <span>About the company</span>
+                    <strong>APPIT Sri Lanka</strong> is a reputable higher educational institution established in
+                    partnership with Staffordshire University in the UK and Asia
+                    Pacific University of Technology and Innovation in Malayasia.
+                </p>
+                <div class="footer-icons">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                </div>
+            </div>
+          </footer>
+          </body>
+          </html>

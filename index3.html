@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Booking</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+   
+</head>
+<link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <link rel= "stylesheet" href= "booking.css">
+   
+
+    <script src="store/location.js"></script>
+    <script src="store/tickets.js"></script>
+    <script src="store/movie.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+
+
+       
+    <section class="home6">
+    <div class="div2">
+        <h1>HIKKADUWA TURTLE HATCHERY ONLINE RESERVATION</h1>
+    </div>
+      </section>      
+          
+        </div>
+           
+          
+            <div class="main2">
+                <div class="pricechart">
+                    
+                      
+                      <table id="pricesPerPerson">
+                        <thead>
+                          <tr>
+                            <th>Category</th>
+                            <th>Normal Hour Charge (USD)</th>
+                            <th>Peak Hour Charge (USD)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Foreigner Adult (above 15 years)</td>
+                            <td>10</td>
+                            <td>13</td>
+                          </tr>
+                          <tr>
+                            <td>Foreigner Child (5 to 14 years)</td>
+                            <td>5</td>
+                            <td>8</td>
+                          </tr>
+                          <tr>
+                            <td>SL Adult (above 15 years)</td>
+                            <td>4</td>
+                            <td>6</td>
+                          </tr>
+                          <tr>
+                            <td>SL Child (5 to 14 years)</td>
+                            <td>2</td>
+                            <td>3</td>
+                          </tr>
+                          <tr>
+                            <td>Infant (Under 4 years)</td>
+                            <td>Free</td>
+                            <td>Free</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      
+                      <div class="container1">
+                        <table id="count">
+                            <tr>
+                                <td> <button id="incrementButton">+</button></td>
+                        <td><label for="SLAdultQuantity">SL Adult </label>
+                        <input type="number" id="SLAdultQuantity" value="0"min="0"></td>
+                       <td>
+                        <button id="decrementButton">-</button></td>
+                        </tr>
+                        <tr>
+                            <td> <button id="incrementButton1">+</button></td>
+                            <td><label for="SLChildQuantity">SL Child </label>
+                            <input type="number" id="SLChildQuantity" value="0"min="0"></td>
+                   <td>
+                    <button id="decrementButton1">-</button></td>
+                    </tr>
+                    <tr>
+                        <td> <button id="incrementButton2">+</button></td>
+                <td><label for="ForeignerAdultQuantity">Foreigner Adult </label>
+                    <input type="number" id="ForeignerAdultQuantity" value="0"min="0"></td>
+               <td>
+                <button id="decrementButton2">-</button></td>
+                </tr>
+                <tr>
+                    <td> <button id="incrementButton3">+</button></td>
+            <td> <label for="ForeignerChildQuantity">Foreigner Child</label>
+                <input type="number" id="ForeignerChildQuantity" value="0"min="0"></td>
+           <td>
+            <button id="decrementButton3">-</button></td>
+            </tr>
+            <tr>
+                <td> <button id="incrementButton4">+</button></td>
+        <td><label for="InfantQuantity">Infant </label>
+        <input type="number" id="InfantQuantity" value="0"min="0"></td>
+       <td>
+        <button id="decrementButton4">-</button></td>
+        </tr>
+        </table>
+                        
+                      
+                       
+                        </div>
+                        </div>
+                        <div class="date">
+    <div class="container2">
+        <div x-data="{ selectedDate: '' }" class="selectdate">
+            <h2>Select a Date:</h2>
+            <input type="date" x-model="selectedDate" @input="storeDate(selectedDate)">
+
+      <script>
+
+          function storeDate(selectedDate) {
+            localStorage.setItem("selectedDate", selectedDate);
+          }
+          
+          document.addEventListener("DOMContentLoaded", () => {
+            const storedDate = localStorage.getItem("selectedDate");
+            if (storedDate) {
+              document.querySelector('input[type="date"]').value = storedDate;
+            }
+          });
+          function storeDate(selectedDate) {
+localStorage.setItem("selectedDate", selectedDate);
+document.querySelector('p').innerText = selectedDate;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+const storedDate = localStorage.getItem("selectedDate");
+if (storedDate) {
+document.querySelector('input[type="date"]').value = storedDate;
+document.querySelector('p').innerText = storedDate;
+}
+});
+      
+</script>
+    <br>
+    </div>
+    <div class="container">
+    <label for="time"><h2>Select Time Slot: </h2></label>
+    
+                <label><input type="checkbox" value="07:00-08:00"> 07:00 to 08:00 (Normal Hours)</label><br>
+                <label><input type="checkbox" value="08:00-09:00"> 08:00 to 09:00 (Normal Hours)</label><br>
+                <label><input type="checkbox" value="09:00-10:00"> 09:00 to 10:00 (Normal Hours)</label><br>
+                <label><input type="checkbox" value="10:00-11:00"><span>10:00 to 11:00 (Peak Hours)</span></label><br>
+                <label><input type="checkbox" value="11:00-12:00"><span>11:00 to 12:00 (Peak Hours)</span></label><br>
+                <label><input type="checkbox" value="12:00-13:00"><span> 12:00 to 13:00 (Peak Hours)</span></label><br>
+                <label><input type="checkbox" value="13:00-14:00"> 13:00 to 14:00 (Normal Hours)</label><br>
+                <label><input type="checkbox" value="14:00-15:00"> 14:00 to 15:00 (Normal Hours)</label><br>
+                <label><input type="checkbox" value="15:00-16:00"><span> 15:00 to 16:00 (Peak Hours)</span></label><br>
+                <label><input type="checkbox" value="16:00-17:00"><span>16:00 to 17:00 (Peak Hours)</span></label><br>
+                <label><input type="checkbox" value="17:00-18:00"><span>17:00 to 18:00 (Peak Hours)</span></label><br>
+                <button onclick="showSelections()">Confirm</button>
+        <!-- Add more time slot options here -->
+    </select>
+    <button onclick="addToCart()">Add to Cart</button>
+    <br><br>
+    </div>
+    </div>
+    </div>
+    <script>
+        function showSelections() {
+          const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          let selectedPeakHours = 0;
+          let selectedNormalHours = 0;
+          let lowerTime = null;
+          let highestTime = null;
+      
+          checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+              const timeSlot = checkbox.value.split('-');
+              const startTime = parseInt(timeSlot[0]);
+              const endTime = parseInt(timeSlot[1]);
+      
+              if (lowerTime === null || startTime < lowerTime) {
+                lowerTime = startTime;
+              }
+      
+              if (highestTime === null || endTime > highestTime) {
+                highestTime = endTime;
+              }
+      
+              if (startTime >= 10 && endTime <= 13) {
+                selectedPeakHours += (endTime - startTime);
+              } else if (startTime >= 15 && endTime <= 18) {
+                selectedPeakHours += (endTime - startTime);
+              } else {
+                selectedNormalHours += (endTime - startTime);
+              }
+            }
+          });
+      
+          const timeSummary = `${lowerTime}:00 to ${highestTime}:00`;
+          const durationSummary = `Duration: ${selectedNormalHours + selectedPeakHours} hours. (Normal: ${selectedNormalHours} / Peak: ${selectedPeakHours})`;
+      
+          // Display selected time range and duration
+          document.querySelector('.time-sum').innerHTML = timeSummary;
+          document.querySelector('.duration-sum').innerHTML = durationSummary;
+      
+          // Store selections in local storage
+          localStorage.setItem("timeSummary", timeSummary);
+          localStorage.setItem("durationSummary", durationSummary);
+        }
+      
+        // Load stored data on page load (if any)
+        document.addEventListener("DOMContentLoaded", () => {
+          const timeSummary = localStorage.getItem("timeSummary");
+          const durationSummary = localStorage.getItem("durationSummary");
+      
+          if (timeSummary && durationSummary) {
+            document.querySelector('.time-sum').innerHTML = timeSummary;
+            document.querySelector('.duration-sum').innerHTML = durationSummary;
+          }
+        });
+      </script>
+      
+          
+           
+       
+            </tr>
+    <br>
+    <div class="summary">
+    <div class="container">
+    </table>
+    <table id="summaryTable">
+        <tr>
+            <td><h3>date:</h3></td>
+            <td> <p x-text="selectedDate"></p></td>
+        </tr>
+        <tr>
+            <td><h3>Time:</h3></td>
+            <td><p><span class="time-sum">-</span></p></td>
+        </tr>
+        <tr>
+            <td><h3>Time Duration:</h3></td>
+            <td><p><span class="duration-sum">-</span></p></td>
+
+    </table>
+    <table id="summaryTable">
+        <thead>
+            <tr>
+                <th>Tickets</th>
+                <th>count</th>
+                <th>Prices</th>
+            </tr>
+        </thead>
+        <tbody id="summaryBody">
+        </tbody>
+       
+            
+        <tfoot>
+           
+        </tfoot>
+    </table>
+    
+    </div>
+    <button id="purchaseBtn">Continue with purchase</button>
+    </div>
+   
+    </div>
+    </div>
+    <script>
+       
+
+        const quantityInput = document.getElementById("SLAdultQuantity");
+        const quantityInput1 = document.getElementById("SLChildQuantity");
+        const quantityInput2 = document.getElementById("ForeignerAdultQuantity");
+        const quantityInput3 = document.getElementById("ForeignerChildQuantity");
+        const quantityInput4 = document.getElementById("InfantQuantity");
+        const incrementButton = document.getElementById("incrementButton");
+        const decrementButton = document.getElementById("decrementButton");
+        const incrementButton1 = document.getElementById("incrementButton1");
+        const decrementButton1 = document.getElementById("decrementButton1");
+        const incrementButton2= document.getElementById("incrementButton2");
+        const decrementButton2 = document.getElementById("decrementButton2");
+        const incrementButton3 = document.getElementById("incrementButton3");
+        const decrementButton3 = document.getElementById("decrementButton3");
+        const incrementButton4 = document.getElementById("incrementButton4");
+        const decrementButton4 = document.getElementById("decrementButton4");
+        incrementButton.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        
+          
+        });
+        incrementButton1.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput1.value);
+            quantityInput1.value = currentValue + 1;
+        });
+        incrementButton2.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput2.value);
+            quantityInput2.value = currentValue + 1;
+        });
+        incrementButton3.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput3.value);
+            quantityInput3.value = currentValue + 1;
+        });
+        incrementButton4.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput4.value);
+            quantityInput4.value = currentValue + 1;
+        });
+        
+
+        decrementButton.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 0) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+        decrementButton1.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput1.value);
+            if (currentValue > 0) {
+                quantityInput1.value = currentValue - 1;
+            }
+        });
+        decrementButton2.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput2.value);
+            if (currentValue > 0) {
+                quantityInput2.value = currentValue - 1;
+            }
+        });
+        decrementButton3.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput3.value);
+            if (currentValue > 0) {
+                quantityInput3.value = currentValue - 1;
+            }
+        });
+        decrementButton4.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput4.value);
+            if (currentValue > 0) {
+                quantityInput4.value = currentValue - 1;
+            }
+        });
+    </script>
+    <script> 
+    const prices = {
+    'SL Adult': { normal: 4, peak: 6 },
+    'SL Child': { normal: 2, peak: 3 },
+    'Foreigner Adult': { normal: 10, peak: 13 },
+    'Foreigner Child': { normal: 5, peak: 8 },
+    'Infant':{normal:0,peak:0}
+};
+
+const timeSlots = {
+    peak: ['10:00-11:00', '11:00-12:00', '12:00-13:00', '15:00-16:00', '16:00-17:00', '17:00-18:00']
+};
+
+function calculatePrice(ticketType, duration, quantity) {
+    const { normal, peak } = prices[ticketType];
+    const [normalDuration, peakDuration] = duration;
+    return (normal * normalDuration + peak * peakDuration) * quantity;
+}
+
+function addToCart() {
+    const selectedTimeCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    const SLAdultQuantity = parseInt(document.getElementById('SLAdultQuantity').value);
+    const SLChildQuantity = parseInt(document.getElementById('SLChildQuantity').value);
+    const ForeignerAdultQuantity = parseInt(document.getElementById('ForeignerAdultQuantity').value);
+    const ForeignerChildQuantity = parseInt(document.getElementById('ForeignerChildQuantity').value);
+    const InfantQuantity=parseInt(document.getElementById('InfantQuantity').value);
+
+    const selectedTimeSlots = Array.from(selectedTimeCheckboxes, checkbox => checkbox.value);
+
+    const timeSlotCounts = {
+        normal: 0,
+        peak: 0
+    };
+
+    selectedTimeSlots.forEach(timeSlot => {
+        if (timeSlots.peak.includes(timeSlot)) {
+            timeSlotCounts.peak++;
+        } else {
+            timeSlotCounts.normal++;
+        }
+    });
+
+    const duration = [timeSlotCounts.normal, timeSlotCounts.peak];
+
+
+            const newRow = document.createElement('tr');
+            const slAdultCharges = calculatePrice('SL Adult', duration, SLAdultQuantity);
+            const slChildCharges = calculatePrice('SL Child', duration, SLChildQuantity);
+            const foreignerAdultCharges = calculatePrice('Foreigner Adult', duration, ForeignerAdultQuantity);
+            const foreignerChildCharges = calculatePrice('Foreigner Child', duration, ForeignerChildQuantity);
+            const totalCharges = slAdultCharges + slChildCharges + foreignerAdultCharges + foreignerChildCharges;
+           
+            
+// Assuming 'summaryBody' is a valid table body element
+
+// Create new table rows for each ticket type
+let slAdultRow = document.createElement('tr');
+let slChildRow = document.createElement('tr');
+let foreignerAdultRow = document.createElement('tr');
+let foreignerChildRow = document.createElement('tr');
+let InfantRow = document.createElement('tr');
+
+// Create the HTML content for each row
+slAdultRow.innerHTML = `
+    <td>sl adult</td><td>${SLAdultQuantity}</td><td>$${calculatePrice('SL Adult', duration, SLAdultQuantity)}</td>`;
+slChildRow.innerHTML = `
+    <td> SLChild</td><td>${SLChildQuantity}</td><td>$${calculatePrice('SL Child', duration, SLChildQuantity)}</td>`;
+foreignerAdultRow.innerHTML = `
+    <td> ForeignerAdult</td><td>${ForeignerAdultQuantity}</td><td>$${calculatePrice('Foreigner Adult', duration, ForeignerAdultQuantity)}</td>`;
+foreignerChildRow.innerHTML = `
+    <td> ForeignerChild</td><td>${ForeignerChildQuantity}</td><td>$${calculatePrice('Foreigner Child', duration, ForeignerChildQuantity)}</td>`;
+    InfantRow.innerHTML = `
+    <td> Infant</td><td>${InfantQuantity}</td><td>free</td>`;
+    
+
+    const newRowHTML = `
+    <td>Total Price</td><td></td><td> $${totalCharges.toFixed(2)}</td>
+`;
+
+// Append each row to the 'summaryBody' element
+document.getElementById('summaryBody').innerHTML = ''; // Clear existing rows
+document.getElementById('summaryBody').appendChild(slAdultRow);
+document.getElementById('summaryBody').appendChild(slChildRow);
+document.getElementById('summaryBody').appendChild(foreignerAdultRow);
+document.getElementById('summaryBody').appendChild(foreignerChildRow);
+document.getElementById('summaryBody').appendChild(InfantRow);
+document.getElementById('summaryBody').appendChild(newRow);
+
+
+
+newRow.innerHTML = newRowHTML;
+document.getElementById('summaryBody').appendChild(newRow);
+
+const userSelections = {
+        SLAdultQuantity: SLAdultQuantity,
+        SLChildQuantity: SLChildQuantity,
+        ForeignerAdultQuantity:ForeignerAdultQuantity,
+        ForeignerChildQuantity:ForeignerChildQuantity,
+        InfantQuantity:InfantQuantity,
+        slAdultCharges:slAdultCharges,
+        slChildCharges:slChildCharges,
+        foreignerAdultCharges:foreignerAdultCharges,
+        foreignerChildCharges:foreignerChildCharges,
+        totalCharges:totalCharges,
+        // ... include other quantities as well    
+    };
+    localStorage.setItem('userSelections', JSON.stringify(userSelections));
+
+            updateTotalPayable();
+        }
+      
+        
+        function updateSummaryTable() {
+            // Update the quantities and charges in the summary table
+            document.getElementById('SLAdultQuantity').textContent = SLAdultQuantity;
+            document.getElementById('SLChildQuantity').textContent = SLChildQuantity;
+            document.getElementById('ForeignerAdultQuantity').textContent = ForeignerAdultQuantity;
+            document.getElementById('ForeignerChildQuantity').textContent = ForeignerChildQuantity;
+            document.getElementById('InfantQuantity').textContent = InfantQuantity;
+
+
+            document.getElementById('slAdultCharges').textContent = `$${slAdultCharges.toFixed(2)}`;
+            document.getElementById('slChildCharges').textContent = `$${slChildCharges.toFixed(2)}`;
+            document.getElementById('foreignerAdultCharges').textContent = `$${foreignerAdultCharges.toFixed(2)}`;
+            document.getElementById('foreignerChildCharges').textContent = `$${foreignerChildCharges.toFixed(2)}`;
+
+            // Update the total payable
+            updateTotalPayable();
+        }
+        
+
+        // Call this function on page load to initialize the table
+        function initTable() {
+            // You can implement this part to load stored data from local storage and populate the summary table
+        }
+
+        initTable();
+        document.getElementById("purchaseBtn").addEventListener("click", function() {
+      window.location.href = "index2.html"; // Replace "another_page.html" with the path to the desired HTML page
+    });
+       
+    </script>
+    <style>
+        /* Reset some default browser styles */
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ol, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 400px;;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+</style>
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+        <h3>Inuka<span>Upek</span></h3>
+  
+        <p class="footer-links">
+            <a href="#">Home</a>
+            |
+            <a href="#">categories</a>
+            |
+            <a href="#">threats</a>
+            |
+            <a href="#">contact</a>
+        </p>
+  
+        <p class="footer-company-name">Copyright © 2023 <strong>Inuka Upek</strong> All rights reserved</p>
+    </div>
+  
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p>
+                Colombo</p>
+        </div>
+  
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+94-773652290</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="inukaupek2003@gmail.com">inukaupek2003@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About the company</span>
+            <strong>APPIT Sri Lanka</strong> is a reputable higher educational institution established in
+            partnership with Staffordshire University in the UK and Asia
+            Pacific University of Technology and Innovation in Malayasia.
+        </p>
+        <div class="footer-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+  </footer>
+  </body>
+  </html>
