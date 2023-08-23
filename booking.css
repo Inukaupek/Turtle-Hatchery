@@ -912,4 +912,11 @@ display: block;
     margin-top:220px;
     
   }
+  .date{
+    margin-left:100px;
+  }
+  .summary{
+    margin-left:80px;
+  }
+	
 }
