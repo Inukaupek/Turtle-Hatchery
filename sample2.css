@@ -937,9 +937,7 @@ footer {
     .main-user-info::-webkit-scrollbar{
         width: 0;
     }
-    .reservation-button{
-	    margin-left:160px;
-    }
+    
 }
 /* styles.css */
 .reservation-button {
@@ -958,4 +956,9 @@ footer {
 
 .reservation-button:hover {
     background-color: #2980b9;
+}
+@media(max-width: 600px){
+.reservation-button{
+	    margin-left:160px;
+    }
 }
