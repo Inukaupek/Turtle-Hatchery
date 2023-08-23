@@ -937,6 +937,9 @@ footer {
     .main-user-info::-webkit-scrollbar{
         width: 0;
     }
+    .reservation-button{
+	    margin-left:160px;
+    }
 }
 /* styles.css */
 .reservation-button {
